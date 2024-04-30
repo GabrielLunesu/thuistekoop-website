@@ -13,7 +13,7 @@ const Header = () => {
         <div className="w-1/2 xl:w-1/3">
           <ul className="hidden xl:flex xl:justify-center">
             <li className="mr-12"><a className="text-coolGray-500 hover:text-coolGray-900 font-medium" href="/">Home</a></li>
-            <li className="mr-12"><a className="text-coolGray-500 hover:text-coolGray-900 font-medium" href="#">Aanbod</a></li>
+            <li className="mr-12"><a className="text-coolGray-500 hover:text-coolGray-900 font-medium" href="/aanbod">Aanbod</a></li>
             <li className="mr-12"><a className="text-coolGray-500 hover:text-coolGray-900 font-medium" href="/over-ons">Over ons</a></li>
             <li><a className="text-coolGray-500 hover:text-coolGray-900 font-medium" href="/contact">Contact</a></li>
           </ul>
