@@ -1,4 +1,13 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+/**
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {
+    images: {
+      domains: ['placehold.co', 'images.unsplash.com'],
 
-export default nextConfig;
+    },
+    // ... any other existing configuration
+  };
+  
+  export default nextConfig;
+  
