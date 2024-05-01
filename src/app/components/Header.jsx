@@ -7,7 +7,7 @@ const Header = () => {
       <nav className="flex justify-between p-6 px-4">
         <div className="flex justify-between items-center w-full">
           <div className="w-1/2 xl:w-1/3">
-            <a className="block max-w-max" href="#">
+            <a className="block max-w-max" href="/">
               <img className="h-14" src="https://i.ibb.co/zFrd1S5/thuistekoop-logo.png" alt="" />
             </a>
           </div>
