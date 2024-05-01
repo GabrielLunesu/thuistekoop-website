@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import ListingContainer from '@/app/components/listings/ListingContainer';
 import FilterComponent from '@/app/components/listings/FilterComponent';
+import SearchBar from '@/app/components/listings/SearchBar';
 
 const Aanbod = () => {
   const [listings, setListings] = useState([
@@ -71,8 +72,9 @@ const Aanbod = () => {
   };
 
   return (
-    <div className="flex">
-      <FilterComponent onFilterChange={handleFilterChange} />
+    <div className="">
+      {/* <SearchBar />
+      <FilterComponent onFilterChange={handleFilterChange} /> */}
       <ListingContainer listings={listings.filter(listing => listing.address.includes(filter))} />
     </div>
   )
