@@ -1,0 +1,140 @@
+{
+    "properties": [
+        {
+            "title": "Hendrik de Swaeffstraat 11",
+            "address": "5706 MX Helmond (Akkers)",
+            "price": "\u20ac 469.000 k.k.",
+            "images": [
+                "https://via.placeholder.com/600x400",
+                "https://via.placeholder.com/600x400",
+                "https://via.placeholder.com/600x400"
+            ],
+            "details": [
+                {
+                    "label": "Woonoppervlakte",
+                    "value": "132 m\u00b2"
+                },
+                {
+                    "label": "Perceeloppervlakte",
+                    "value": "275 m\u00b2"
+                },
+                {
+                    "label": "Bouwjaar",
+                    "value": "1998"
+                },
+                {
+                    "label": "Kamers",
+                    "value": "5"
+                }
+            ],
+            "description": "Deze woning wordt sinds 30 april 2024 aangeboden door Adriaan van den Heuvel Makelaars en Adviseurs...",
+            "space": [
+                {
+                    "label": "Woonoppervlakte",
+                    "value": "132 m\u00b2"
+                },
+                {
+                    "label": "Perceeloppervlakte",
+                    "value": "275 m\u00b2"
+                },
+                {
+                    "label": "Inhoud",
+                    "value": "463 m\u00b3"
+                }
+            ],
+            "build": [
+                {
+                    "label": "Type woning",
+                    "value": "Huis"
+                },
+                {
+                    "label": "Soort woning",
+                    "value": "2-onder-1-kapwoning, Eengezinswoning"
+                },
+                {
+                    "label": "Soort bouw",
+                    "value": "Bestaande bouw"
+                },
+                {
+                    "label": "Bouwjaar",
+                    "value": "1998"
+                }
+            ],
+            "layoutDetails": {
+                "aantalKamers": 5,
+                "aantalSlaapkamers": 4,
+                "aantalBadkamers": 1,
+                "aantalWoonlagen": 3,
+                "voorzieningen": [
+                    "Mechanische ventilatie",
+                    "Douche",
+                    "Toilet",
+                    "Buitenzonwering",
+                    "Dakraam",
+                    "Wasruimte"
+                ]
+            },
+            "outdoor": [
+                {
+                    "label": "Balkon",
+                    "value": "Niet aanwezig"
+                },
+                {
+                    "label": "Tuin",
+                    "value": "Aanwezig (110 m\u00b2, gelegen op het zuiden)"
+                },
+                {
+                    "label": "Tuinbeschrijving",
+                    "value": "achtertuin, voortuin"
+                }
+            ],
+            "energy": {
+                "isolatie": "Dubbele beglazing, Vloerisolatie, Dakisolatie, Muurisolatie",
+                "verwarming": "CV-ketel",
+                "warmWater": "CV-ketel",
+                "cvKetel": "Vaillant (Gas, uit 2016, Eigendom)",
+                "energielabel": "B"
+            },
+            "parkdetails": [
+                {
+                    "label": "Aanwezig",
+                    "value": "Ja"
+                },
+                {
+                    "label": "Soort parkeergelegenheid",
+                    "value": "Openbaar"
+                }
+            ],
+            "garagedetails": [
+                {
+                    "label": "Aanwezig",
+                    "value": "Ja"
+                },
+                {
+                    "label": "Omschrijving",
+                    "value": "Vrijstaand steen"
+                }
+            ],
+            "bidding": {
+                "initialPrice": 469000,
+                "hoursUntilClose": 12,
+                "bids": [
+                    {
+                        "bidder": "John Doe",
+                        "amount": 470000,
+                        "time": "2024-04-25 14:00"
+                    },
+                    {
+                        "bidder": "Jane Smith",
+                        "amount": 471000,
+                        "time": "2024-04-26 15:30"
+                    }
+                ]
+            }
+        }
+    ]
+}
+
+
+
+
