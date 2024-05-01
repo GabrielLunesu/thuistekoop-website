@@ -72,9 +72,9 @@ const Aanbod = () => {
   };
 
   return (
-    <div className="flex">
-      {/* <SearchBar /> */}
-      {/* <FilterComponent onFilterChange={handleFilterChange} /> */}
+    <div className="">
+      {/* <SearchBar />
+      <FilterComponent onFilterChange={handleFilterChange} /> */}
       <ListingContainer listings={listings.filter(listing => listing.address.includes(filter))} />
     </div>
   )
