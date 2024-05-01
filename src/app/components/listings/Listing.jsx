@@ -4,7 +4,7 @@ const Listing = ({ listing }) => {
   return (
     <a
       className="max-w-sm rounded overflow-hidden shadow-lg m-2 hover:shadow-xl transition-shadow duration-300"
-      href={`/listing/${listing.id}`}
+      href={`/residentie/${listing.id}`}
     >
       <img className="w-full" src={listing.image} alt="House image" />
       <div className="px-6 py-4 bg-white">
