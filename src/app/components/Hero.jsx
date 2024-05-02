@@ -17,9 +17,7 @@ const Hero = () => {
             </div>
             <div className="w-full md:w-1/2 px-4">
               <div className="relative mx-auto md:mr-0 max-w-max">
-                <img className="absolute z-10 -left-14 -top-12 w-28 md:w-auto" src="flex-ui-assets/elements/circle3-yellow.svg" alt="" />
-                <img className="absolute z-10 -right-7 -bottom-8 w-28 md:w-auto" src="flex-ui-assets/elements/dots3-blue.svg" alt="" />
-                <img className="relative rounded-7xl" src="https://static.shuffle.dev/uploads/files/ca/ca93b15d6cf770d6b247547f82af68584d64acf8/Untitled-design-46.png" alt="" />
+               <img className="relative shadow-xl rounded-xl" src="https://static.shuffle.dev/uploads/files/ca/ca93b15d6cf770d6b247547f82af68584d64acf8/Untitled-design-46.png" alt="" />
               </div>
             </div>
           </div>

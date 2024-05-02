@@ -31,7 +31,7 @@ const ListingSection = () => {
         },
       },
       {
-        breakpoint: 1200,
+        breakpoint: 1700,
         settings: {
           slidesToShow: 3, // Display three items on larger screens
         },
