@@ -6,7 +6,6 @@ const Hero = () => {
             <div class="container px-4 mx-auto">
                 <div class="flex flex-wrap items-center">
                     <div class="w-full lg:w-1/2 mb-20 lg:mb-0">
-                        <span class="inline-block py-px px-2 mb-4 text-xs leading-5 text-white bg-navy font-medium uppercase rounded-9xl">Header</span>
                         <h1 class="mb-6 text-3xl md:text-5xl lg:text-6xl leading-tight text-coolGray-900 font-bold tracking-tight">Contacteer ons nu, bekijk wat er mogelijk is</h1>
                         <p class="mb-8 text-lg md:text-xl leading-7 text-coolGray-500 font-medium">Wacht niet! contacteer ons nu</p>
                         <ul>
@@ -32,8 +31,12 @@ const Hero = () => {
                     <div class="w-full lg:w-1/2">
                         <div class="flex flex-col items-center p-10 xl:px-24 xl:pb-12 bg-white lg:max-w-xl lg:ml-auto rounded-4xl shadow-2xl" data-np-autofill-form-type="register" data-np-checked="1" data-np-watching="1">
                             <img class="relative -top-2 -mt-16 mb-6 h-16" src="flex-ui-assets/logos/flex-circle-green.svg" alt="" />
-                            <h2 class="mb-4 text-2xl md:text-3xl text-coolGray-900 font-bold text-center">Join our community</h2>
-                            <h3 class="mb-7 text-base md:text-lg text-coolGray-500 font-medium text-center">Start your free trial</h3>
+                            <h2 class="mb-4 text-2xl md:text-3xl text-coolGray-900 font-bold text-center">Informatie</h2>
+                            <h3 class="mb-7 text-base md:text-lg text-coolGray-500 font-medium text-center">Grasbroekerweg 141, 6412BD Heerlen</h3>
+                            <h3 class="mb-7 text-base md:text-lg text-coolGray-500 font-medium text-center"><b>KVK</b> 12345678</h3>
+                            <h3 class="mb-7 text-base md:text-lg text-coolGray-500 font-medium text-center"><b>E-mail</b> info@thuistekoop.nl</h3>
+
+
                             <label class="mb-4 flex flex-col w-full"></label>
                             <div class="flex items-center mb-4 w-full text-xs text-coolGray-400">
                                 <div class="flex-1 h-px bg-coolGray-100"></div>
