@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import Home from "../../pages/home";
 import Wrapper from "./wrapper";
