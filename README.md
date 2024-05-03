@@ -1,7 +1,5 @@
+backend: https://thuistekoop-website-server-1.onrender.com/docs
 
-
-
-- Back end Development for Create Property and Property Details Page
-- MongoDB Setup.
-- Integrate API into Property Detail Page
-- Integrate API into Create Property Page 
+Stack:
+ - FastAPI
+ - nextjs
