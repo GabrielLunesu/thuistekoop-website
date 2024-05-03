@@ -137,7 +137,7 @@ async function getServerSideProps(context) {
   const { id } = params; // Extract 'id' from URL parameters
 
   // Fetch property data based on the extracted 'id'
-  const res = await fetch(`https://thuistekoop-website-server-1.onrender.com/api/v1/property/66347b7727ab6b2b109d13f3`);
+  const res = await fetch(`https://thuistekoop-website-server-1.onrender.com/api/v1/property/${id}`);
   const data = await res.json();
   // // Check if we received data successfully
   // if (!data || data.error) {
