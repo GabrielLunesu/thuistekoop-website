@@ -54,11 +54,13 @@ const ListingSection = () => {
     <Slider {...settings}>
       {placeholderListings.map((listing) => (
         <div key={listing.id} className="px-4 mb-6">
+          <a href={`/residentie/${listing.id}`}>
           <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
             <Image src={listing.imageSrc} alt={listing.title} width={500} height={500} className="rounded-md mb-4" />
             <h3 className="text-lg font-semibold">{listing.title}</h3>
             <p className="text-sm text-black">{listing.description}</p>
           </div>
+          </a>
         </div>
       ))}
     </Slider>

@@ -1,27 +1,46 @@
-import React, { useState } from 'react';
-import PropertyList from './PropertyList';  // Component to list all properties
-import PropertyForm from './PropertyForm';  // Component to add/edit properties
+import React, { useState, useEffect } from "react";
+import PropertyList from "./PropertyList";
+import PropertyForm from "./PropertyForm";
 
 const AdminPanel = () => {
   const [properties, setProperties] = useState([]);
+  const [id, setId] = useState("");
 
-  const addProperty = (property) => {
-    setProperties([...properties, {...property, id: properties.length + 1}]);
+  useEffect(() => {
+    // Fetch properties from API on component mount
+    fetchProperties();
+  }, []);
+
+  const fetchProperties = async () => {
+    try {
+      const response = await fetch("https://thuistekoop-website-server-1.onrender.com/api/v1/property");
+      const data = await response.json();
+      setProperties(data.data);
+    } catch (error) {
+      console.error("Error fetching properties:", error);
+    }
   };
 
-  const deleteProperty = (id) => {
-    setProperties(properties.filter(p => p.id !== id));
+  const deleteProperty = async (id) => {
+    try {
+      await fetch(`https://thuistekoop-website-server-1.onrender.com/api/v1/property/${id}`, {
+        method: "DELETE",
+      });
+      setProperties(properties.filter((p) => p.id !== id));
+    } catch (error) {
+      console.error("Error deleting property:", error);
+    }
   };
 
-  const updateProperty = (updatedProperty) => {
-    setProperties(properties.map(p => p.id === updatedProperty.id ? updatedProperty : p));
+  const updateId = async (updatedProperty) => {
+    setId(updatedProperty.id);
   };
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <h1 className="text-2xl font-bold text-gray-900 mb-4">Admin Panel</h1>
-      <PropertyForm addProperty={addProperty} />
-      <PropertyList properties={properties} deleteProperty={deleteProperty} updateProperty={updateProperty} />
+      <PropertyForm id={id} dataSubmitted={fetchProperties} />
+      <PropertyList properties={properties} deleteProperty={deleteProperty} updateProperty={updateId} />
     </div>
   );
 };
