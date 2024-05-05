@@ -34,7 +34,7 @@ const emptyState = {
   garagedetails: [{ label: "", value: "" }],
   biddingData: {
     initialPrice: 0,
-    hoursUntilClose: 0,
+    bidEndTime: "",
     bids: [
       {
         bidder: "",
@@ -104,7 +104,7 @@ const validationSchema = Yup.object().shape({
   ),
   biddingData: Yup.object().shape({
     initialPrice: Yup.number().required("Initial price is required"),
-    hoursUntilClose: Yup.number().required("Hours until close is required"),
+    bidEndTime: Yup.date().required("Bid end time is required"),
     bids: Yup.array().of(
       Yup.object().shape({
         bidder: Yup.string().required("Bidder name is required"),
@@ -363,14 +363,14 @@ const PropertyForm = ({ id, dataSubmitted }) => {
               <ErrorMessage className="text-red-500" name="biddingData.initialPrice" component="div" />
             </div>
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">HoursUntilClose</label>
+              <label className="block text-gray-700 text-sm font-bold mb-2">BidEndTime</label>
               <Field
                 type="number"
-                name="biddingData.hoursUntilClose"
+                name="biddingData.bidEndTime"
                 onChange={handleChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-              <ErrorMessage className="text-red-500" name="biddingData.hoursUntilClose" component="div" />
+              <ErrorMessage className="text-red-500" name="biddingData.bidEndTime" component="div" />
             </div>
           </div>
 

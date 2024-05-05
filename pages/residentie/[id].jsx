@@ -179,7 +179,7 @@ const PropertyPage = ({ property }) => {
       <BiddingDetails
         initialPrice={biddingData.initialPrice}
         bids={biddingData.bids}
-        hoursUntilClose={biddingData.hoursUntilClose}
+        bidEndTime={biddingData.bidEndTime}
       />
 
       <PropertyDetails details={details} />
