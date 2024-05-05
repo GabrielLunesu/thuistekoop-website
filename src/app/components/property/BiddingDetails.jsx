@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-const BiddingDetails = ({ initialPrice, bids, hoursUntilClose }) => {
+const BiddingDetails = ({ initialPrice, bids, bidEndTime }) => {
   const [highestBid, setHighestBid] = useState(initialPrice);
-  const [timeLeft, setTimeLeft] = useState(hoursUntilClose);
+  const [timeLeft, setTimeLeft] = useState(bidEndTime);
 
   useEffect(() => {
     const timer = setInterval(() => {
