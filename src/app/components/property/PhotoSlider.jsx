@@ -14,10 +14,10 @@ const PhotoSlider = ({ images }) => {
   };
 
   return (
-    <div className="slider-container">
-      <Slider {...settings}>
+    <div className="slider-container px-4 mt-5 shadow-lg">
+      <Slider {...settings} >
         {images.map((image, index) => (
-          <div key={index} className="w-full h-64 md:h-96">  
+          <div key={index} className="w-full rounded-xl h-64 md:h-96">  
             <img src={image} alt="Property Image" className="slider-image" />
           </div>
         ))}
