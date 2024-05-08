@@ -1,46 +1,44 @@
-import React from 'react';
 import { useUser } from '@auth0/nextjs-auth0/client';
+import { parseISO, format } from 'date-fns';
 
-const BookingDates = ({ bookingData, propertyId }) => {
-  const { user } = useUser(); // This hook provides user info
+const BookingDates = ({ bookingSlots, propertyTitle }) => {
+  const { user, isLoading } = useUser();
 
-  const handleBooking = async (bookingDate) => {
-    if (!user || !user.email) {
-      alert('You must be logged in to book a visit.');
+  const formatDateTime = (isoDateString) => {
+    return format(parseISO(isoDateString), "PPpp");
+  };
+
+  if (!bookingSlots || bookingSlots.length === 0) {
+    return <p>No booking slots available.</p>;
+  }
+
+  const handleBookingClick = (bookingDate) => {
+    if (!user || isLoading) {
+      alert("Please log in to book a visit.");
       return;
     }
 
-    const bookingDetails = {
-      property_id: propertyId,
-      user_email: user.email,
-      booking_date: bookingDate
-    };
+    const userEmail = user.email;
+    const userName = user.name;
+    const subject = `Booking request for ${propertyTitle}`;
+    const body = `Hi, my name is ${userName} and I want to book a visit for ${propertyTitle} on ${bookingDate}. My email is ${userEmail}.`;
 
-    // Post request to backend to save the booking
-    try {
-      const response = await fetch('/api/bookings', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(bookingDetails)
-      });
+    const mailtoLink = `mailto:sales@realestate.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-      if (!response.ok) throw new Error('Failed to book the property.');
-      alert('Booking successful!');
-    } catch (error) {
-      console.error('Booking failed:', error);
-      alert('Failed to book the property.');
-    }
+    // Open the default email client
+    window.open(mailtoLink, '_blank');
   };
 
   return (
     <div>
-      <h3>Available Booking Slots:</h3>
-      {bookingData.bookingSlots.map((slot, index) => (
-        <div key={index}>
-          <p>Date: {new Date(slot.bookingDate).toLocaleDateString()} at {slot.bookingTime}</p>
-          <button onClick={() => handleBooking(slot.bookingDate)} className="btn-primary">
+      <h3 className="text-lg font-semibold mb-2">Available Booking Slots:</h3>
+      {bookingSlots.map((slot, index) => (
+        <div key={index} className="mb-4">
+          <p className="text-gray-600 mb-1">{formatDateTime(slot.bookingDate)}</p>
+          <button 
+            onClick={() => handleBookingClick(formatDateTime(slot.bookingDate))}
+            className="bg-navy text-white px-4 py-2 rounded hover:bg-navy-dark focus:outline-none focus:ring-2 focus:ring-navy-dark"
+          >
             Book Visit
           </button>
         </div>

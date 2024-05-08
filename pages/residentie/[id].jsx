@@ -53,7 +53,8 @@ const PropertyPage = ({ property }) => {
     parkdetails,
     garagedetails,
     biddingData,
-    bookingData
+    bookingData,
+    bookingData: { bookingSlots }
   } = property;
   return (
     <div className="max-w-4xl mx-auto">
@@ -77,9 +78,9 @@ const PropertyPage = ({ property }) => {
       <PropertyGarage garagedetails={garagedetails} />
          {/* Render BookingDates only if bookingData exists */}
          {property.bookingData && (
-        <BookingDates bookingData={property.bookingData} />
+        <BookingDates bookingSlots={bookingSlots} propertyTitle={property.title} />
       )} 
-      </div>
+      </div>  
   );
 };
 
