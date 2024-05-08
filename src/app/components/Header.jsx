@@ -27,9 +27,9 @@ const Header = () => {
             ))}
           </div>
           <div className="flex space-x-2">
-            <Link href="/admin">
+            <Link href="/login">
               <button className="px-4 py-2 text-sm font-medium text-white bg-navy rounded-md hover:bg-navy-dark transition duration-300">
-                Admin
+                Login
               </button>
             </Link>
             <Link href="/register">
