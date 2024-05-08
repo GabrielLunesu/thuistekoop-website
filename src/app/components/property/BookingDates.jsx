@@ -17,7 +17,7 @@ const BookingDates = ({ bookingSlots, propertyTitle }) => {
   };
 
   if (!bookingSlots || bookingSlots.length === 0) {
-    return <p>Geen boekingsslots beschikbaar.</p>;
+    return <p className="text-gray-600">Geen boekingsslots beschikbaar.</p>;
   }
 
   const handleBookingClick = (bookingDate) => {
@@ -60,23 +60,28 @@ const BookingDates = ({ bookingSlots, propertyTitle }) => {
   };
 
   return (
-    <div>
-      <h3 className="text-lg font-semibold mb-2">Beschikbare boekingsslots:</h3>
-      {bookingSlots.map((slot, index) => (
-        <div key={index} className="mb-4">
-          <p className="text-gray-600 mb-1">{formatDateTime(slot.bookingDate)}</p>
-          <button
-            onClick={() => handleBookingClick(formatDateTime(slot.bookingDate))}
-            className="bg-navy text-white px-4 py-2 rounded hover:bg-navy-dark focus:outline-none focus:ring-2 focus:ring-navy-dark"
+    <div className="bg-white shadow-md rounded-lg p-6">
+      <h3 className="text-xl font-semibold mb-4">Beschikbare boekingsslots:</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {bookingSlots.map((slot, index) => (
+          <div
+            key={index}
+            className="bg-gray-100 rounded-lg p-4 shadow-md transition-all duration-300 hover:shadow-lg"
           >
-            Boek bezoek
-          </button>
-        </div>
-      ))}
+            <p className="text-gray-600 mb-2">{formatDateTime(slot.bookingDate)}</p>
+            <button
+              onClick={() => handleBookingClick(formatDateTime(slot.bookingDate))}
+              className="bg-navy text-white px-4 py-2 rounded-md hover:bg-dark-blue transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-navy-dark"
+            >
+              Boek bezoek
+            </button>
+          </div>
+        ))}
+      </div>
 
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
             <h3 className="text-lg font-semibold mb-4">Boekingsaanvraag</h3>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
@@ -130,7 +135,7 @@ const BookingDates = ({ bookingSlots, propertyTitle }) => {
               <div className="flex justify-end">
                 <button
                   type="submit"
-                  className="bg-navy text-white px-4 py-2 rounded hover:bg-navy-dark focus:outline-none focus:ring-2 focus:ring-navy-dark"
+                  className="bg-navy text-white px-4 py-2 rounded-md hover:bg-dark-blue transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-navy-dark"
                 >
                   Verzenden
                 </button>
