@@ -3,7 +3,7 @@
  */
 const nextConfig = {
     images: {
-      domains: ['placehold.co', 'images.unsplash.com', 'i.ibb.co'],
+      domains: ['placehold.co', 'images.unsplash.com', 'i.ibb.co', 'lh3.googleusercontent.com'],
 
     },
     // ... any other existing configuration

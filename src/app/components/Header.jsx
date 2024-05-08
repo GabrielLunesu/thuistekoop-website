@@ -2,14 +2,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { useUser } from '@auth0/nextjs-auth0';
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 const Header = () => {
-
-  const {user, error, isLoading} = useUser();
-
-  console.log(user);
-
+  const { user, error, isLoading } = useUser();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -33,16 +29,29 @@ const Header = () => {
             ))}
           </div>
           <div className="flex space-x-2">
-            <Link href="/api/auth/login">
-              <button className="px-4 py-2 text-sm font-medium text-white bg-navy rounded-md hover:bg-navy-dark transition duration-300">
-                Login
-              </button>
-            </Link>
-            <Link href="/api/auth/register">
-              <button className="px-4 py-2 text-sm font-medium text-black bg-white border border-coolGray-200 rounded-md hover:bg-coolGray-100 transition duration-300">
-                Registreer
-              </button>
-            </Link>
+            {user ? (
+              <>
+              <Image src={user.picture} alt="Profile" width={35} height={35} className="rounded-full mr-2 order-first" />
+                <Link href="/api/auth/logout">
+                  <button className="px-4 py-2 text-sm font-medium text-white bg-navy rounded-md hover:bg-navy-dark transition duration-300">
+                    Logout
+                  </button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href="/api/auth/login">
+                  <button className="px-4 py-2 text-sm font-medium text-white bg-navy rounded-md hover:bg-navy-dark transition duration-300">
+                    Login
+                  </button>
+                </Link>
+                <Link href="/api/auth/register">
+                  <button className="px-4 py-2 text-sm font-medium text-black bg-white border border-coolGray-200 rounded-md hover:bg-coolGray-100 transition duration-300">
+                    Register
+                  </button>
+                </Link>
+              </>
+            )}
           </div>
           <button className="md:hidden flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-navy focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" onClick={toggleMobileMenu}>
             <svg className="h-6 w-6" fill="none" stroke="currentColor">
