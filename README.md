@@ -11,6 +11,6 @@ to do:
 - a solution for the photos per property?
 
 
-
+right now using gabriel47lunesu@gmail.com for bookings!!
 
 BOOKINGS DONT SHOW UP YET!!!!
