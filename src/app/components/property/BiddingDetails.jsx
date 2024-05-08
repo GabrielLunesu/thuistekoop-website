@@ -55,7 +55,7 @@ const BiddingDetails = ({ initialPrice, bids, bidEndTime }) => {
   };
 
   return (
-    <div className="bg-navy p-4 shadow-2xl rounded-lg text-white">
+    <div className="bg-navy px-10 mx-5 p-4 shadow-2xl rounded-lg text-white">
       <div className="mb-4">
         <h2 className="text-2xl font-bold">Current Price: €{highestBid.toLocaleString()}</h2>
         <p>Bidding closes in: {formatTimeLeft()}</p>
