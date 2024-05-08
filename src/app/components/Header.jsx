@@ -2,8 +2,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { useUser } from '@auth0/nextjs-auth0';
 
 const Header = () => {
+
+  const {user, error, isLoading} = useUser();
+
+  console.log(user);
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -27,12 +33,12 @@ const Header = () => {
             ))}
           </div>
           <div className="flex space-x-2">
-            <Link href="/login">
+            <Link href="/api/auth/login">
               <button className="px-4 py-2 text-sm font-medium text-white bg-navy rounded-md hover:bg-navy-dark transition duration-300">
                 Login
               </button>
             </Link>
-            <Link href="/register">
+            <Link href="/api/auth/register">
               <button className="px-4 py-2 text-sm font-medium text-black bg-white border border-coolGray-200 rounded-md hover:bg-coolGray-100 transition duration-300">
                 Registreer
               </button>
