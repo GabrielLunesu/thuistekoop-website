@@ -1,0 +1,46 @@
+.modal {
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh; /* Limit the height of the modal */
+    background: white;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 1000;
+    overflow-y: auto; /* Enable vertical scrolling */
+    border-radius: 8px; /* Optional: Adds rounded corners to the modal */
+  }
+  
+  .modal-content {
+    position: relative; /* Needed for proper positioning of the close button */
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px; /* Position the close button in the top right corner */
+    right: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 50%; /* Makes the button round */
+    cursor: pointer;
+  }
+  
+  .add-button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  

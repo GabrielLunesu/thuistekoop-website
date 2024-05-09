@@ -1,10 +1,12 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import ImageFieldArray from "./common/ImageFieldArray";
 import CommonFieldArray from "./common/CommonFieldArray";
 import StringFieldArray from "./common/StringFieldArray";
 import BiddingFieldArray from "./common/BiddingFieldArray";
+import BookingSlotsFieldArray from "./common/BookingSlotsFieldArray";
+
 
 const emptyState = {
   title: "",
@@ -40,6 +42,14 @@ const emptyState = {
         bidder: "",
         amount: "",
         time: "",
+      },
+    ],
+  },
+  bookingData: {
+    bookingSlots: [
+      {
+        bookingDate: "",
+        bookingTime: "",
       },
     ],
   },
@@ -107,11 +117,19 @@ const validationSchema = Yup.object().shape({
     bidEndTime: Yup.date().required("Bid end time is required"),
     bids: Yup.array().of(
       Yup.object().shape({
-        bidder: Yup.string().required("Bidder name is required"),
-        amount: Yup.number().required("Bid amount is required"),
-        time: Yup.date().required("Bid time is required"),
+        bidder: Yup.string(),
+        amount: Yup.number(),
+        time: Yup.date(),
       })
     ),
+  }),
+  bookingData: Yup.object().shape({
+    bookingSlots: Yup.array().of(
+      Yup.object().shape({
+        bookingDate: Yup.date(),
+        bookingTime: Yup.string(),
+      })
+    ).required("Booking slots are required"),
   }),
 });
 
@@ -172,45 +190,45 @@ const PropertyForm = ({ id, dataSubmitted }) => {
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit} enableReinitialize>
       {({ handleSubmit, values, onSubmit, handleChange }) => (
-        <Form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow">
+        <Form onSubmit={handleSubmit} className="bg-navy text-white p-4 rounded shadow">
           <div className="grid grid-flow-col grid-cols-4 gap-4 items-start mb-4">
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">Title</label>
+              <label className="block text-white text-sm font-bold mb-2">Title</label>
               <Field
                 type="text"
                 name="title"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="title" component="div" />
             </div>
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">Address</label>
+              <label className="block text-white text-sm font-bold mb-2">Address</label>
               <Field
                 type="text"
                 name="address"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="address" component="div" />
             </div>
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">Price</label>
+              <label className="block text-white text-sm font-bold mb-2">Price</label>
               <Field
                 type="text"
                 name="price"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="price" component="div" />
             </div>
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">Description</label>
+              <label className="block text-white text-sm font-bold mb-2">Description</label>
               <Field
                 type="text"
                 name="description"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="description" component="div" />
             </div>
@@ -237,42 +255,42 @@ const PropertyForm = ({ id, dataSubmitted }) => {
 
           <div className="grid grid-flow-col grid-cols-4 gap-4 items-start mb-4">
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">aantalKamers</label>
+              <label className="block text-white text-sm font-bold mb-2">aantalKamers</label>
               <Field
                 type="number"
                 name="layoutDetailsData.aantalKamers"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="layoutDetailsData.aantalKamers" component="div" />
             </div>
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">aantalSlaapkamers</label>
+              <label className="block text-white text-sm font-bold mb-2">aantalSlaapkamers</label>
               <Field
                 type="number"
                 name="layoutDetailsData.aantalSlaapkamers"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="layoutDetailsData.aantalSlaapkamers" component="div" />
             </div>
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">aantalBadkamers</label>
+              <label className="block text-white text-sm font-bold mb-2">aantalBadkamers</label>
               <Field
                 type="number"
                 name="layoutDetailsData.aantalBadkamers"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="layoutDetailsData.aantalBadkamers" component="div" />
             </div>
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">aantalWoonlagen</label>
+              <label className="block text-white text-sm font-bold mb-2">aantalWoonlagen</label>
               <Field
                 type="number"
                 name="layoutDetailsData.aantalWoonlagen"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="layoutDetailsData.aantalWoonlagen" component="div" />
             </div>
@@ -290,52 +308,52 @@ const PropertyForm = ({ id, dataSubmitted }) => {
 
           <div className="grid grid-flow-col grid-cols-5 gap-4 items-start mb-4">
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">isolatie</label>
+              <label className="block text-white text-sm font-bold mb-2">isolatie</label>
               <Field
                 type="text"
                 name="energyData.isolatie"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="energyData.isolatie" component="div" />
             </div>
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">verwarming</label>
+              <label className="block text-white text-sm font-bold mb-2">verwarming</label>
               <Field
                 type="text"
                 name="energyData.verwarming"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="energyData.verwarming" component="div" />
             </div>
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">warmWater</label>
+              <label className="block text-white text-sm font-bold mb-2">warmWater</label>
               <Field
                 type="text"
                 name="energyData.warmWater"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="energyData.warmWater" component="div" />
             </div>
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">cvKetel</label>
+              <label className="block text-white text-sm font-bold mb-2">cvKetel</label>
               <Field
                 type="text"
                 name="energyData.cvKetel"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="energyData.cvKetel" component="div" />
             </div>
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">energielabel</label>
+              <label className="block text-white text-sm font-bold mb-2">energielabel</label>
               <Field
                 type="text"
                 name="energyData.energielabel"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="energyData.energielabel" component="div" />
             </div>
@@ -353,22 +371,22 @@ const PropertyForm = ({ id, dataSubmitted }) => {
 
           <div className="grid grid-flow-col grid-cols-4 gap-4 items-start mb-4">
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">InitialPrice</label>
+              <label className="block text-white text-sm font-bold mb-2">InitialPrice</label>
               <Field
                 type="number"
                 name="biddingData.initialPrice"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="biddingData.initialPrice" component="div" />
             </div>
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">BidEndTime</label>
+              <label className="block text-white text-sm font-bold mb-2">BidEndTime</label>
               <Field
                 type="number"
                 name="biddingData.bidEndTime"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="biddingData.bidEndTime" component="div" />
             </div>
@@ -377,6 +395,10 @@ const PropertyForm = ({ id, dataSubmitted }) => {
           <div className="flex flex-col mb-4">
             <span className="font-bold mb-2 ">Bids</span>
             <BiddingFieldArray name="biddingData.bids" values={values} handleChange={handleChange} />
+          </div>
+          <div className="flex flex-col mb-4">
+            <span className="font-bold mb-2">Booking Data</span>
+            <BookingSlotsFieldArray name="bookingData.bookingSlots" values={values} handleChange={handleChange} />
           </div>
 
           <button

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import PropertyList from "./PropertyList";
 import PropertyForm from "./PropertyForm";
+import "./Modal/Modal.css"; // Ensure you import your CSS here
 
 const AdminPanel = () => {
   const [properties, setProperties] = useState([]);
-  const [id, setId] = useState("");
+  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
-    // Fetch properties from API on component mount
     fetchProperties();
   }, []);
 
@@ -21,26 +22,43 @@ const AdminPanel = () => {
     }
   };
 
-  const deleteProperty = async (id) => {
-    try {
-      await fetch(`https://thuistekoop-website-server-1.onrender.com/api/v1/property/${id}`, {
-        method: "DELETE",
-      });
-      setProperties(properties.filter((p) => p.id !== id));
-    } catch (error) {
-      console.error("Error deleting property:", error);
-    }
+  const openModalToEdit = (property) => {
+    setSelectedProperty(property);
+    setModalOpen(true);
   };
 
-  const updateId = async (updatedProperty) => {
-    setId(updatedProperty.id);
+  const handleFormSubmit = (propertyData, isNew) => {
+    const url = `https://thuistekoop-website-server-1.onrender.com/api/v1/property/${isNew ? '' : propertyData.id}`;
+    const method = isNew ? 'POST' : 'PUT';
+
+    fetch(url, {
+      method: method,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(propertyData)
+    }).then(() => {
+      fetchProperties(); // Reload properties after submitting
+      setModalOpen(false); // Close modal
+    }).catch(error => {
+      console.error("Failed to submit property data:", error);
+    });
   };
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <h1 className="text-2xl font-bold text-gray-900 mb-4">Admin Panel</h1>
-      <PropertyForm id={id} dataSubmitted={fetchProperties} />
-      <PropertyList properties={properties} deleteProperty={deleteProperty} updateProperty={updateId} />
+      <button className="add-button" onClick={() => openModalToEdit(null)}>Add Property</button>
+      <PropertyList properties={properties} deleteProperty={() => { }} updateProperty={openModalToEdit} />
+      {isModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <button className="close-button" onClick={() => setModalOpen(false)}>✕</button>
+            <PropertyForm propertyData={selectedProperty} handleSubmit={handleFormSubmit} isNew={!selectedProperty} />
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
