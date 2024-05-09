@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { name, email, subject, body } = req.body;
+  const { name, email, subject, body, message } = req.body;
 
   try {
     // Create a transporter
@@ -22,12 +22,13 @@ export default async function handler(req, res) {
     });
 
     // Define the email options
-    const mailOptions = {
-      from: 'gabriel47lunesu@gmail.com',
-      to: 'g.lunesu@outlook.com',
-      subject,
-      text: `Name: ${name}\nEmail: ${email}\n\n${body}`,
-    };
+   // Define the email options
+   const mailOptions = {
+    from: 'gabriel47lunesu@gmail.com', // Replace with your Gmail email address
+    to: 'g.lunesu@outlook.com', // Replace with the recipient's email address
+    subject,
+    text: message,
+  };
 
     // Send the email
     await transporter.sendMail(mailOptions);

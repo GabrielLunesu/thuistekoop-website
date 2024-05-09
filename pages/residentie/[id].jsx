@@ -62,6 +62,7 @@ const PropertyPage = ({ property }) => {
       <PropertySummary property={{ title, address, price }} />
 
       <BiddingDetails
+        propertyTitle={property.title}
         initialPrice={biddingData.initialPrice}
         bids={biddingData.bids}
         bidEndTime={biddingData.bidEndTime}

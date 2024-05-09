@@ -24,12 +24,18 @@ const Header = () => {
     setHoverLink('');
   };
 
-  useEffect(() => {
-    const currentPath = segments?.[0] || 'home';
-    setActiveLink(currentPath);
-  }, [segments]);
+  const handleLinkClick = (link) => {
+    setActiveLink(link);
+  };
 
-  // ... (rest of the component code)
+  useEffect(() => {
+    const currentPath = segments?.[0] || '';
+    if (currentPath === '') {
+      setActiveLink('home');
+    } else {
+      setActiveLink(currentPath);
+    }
+  }, [segments]);
 
   return (
     <>
@@ -47,27 +53,28 @@ const Header = () => {
               </Link>
             </div>
             <div className='hidden md:flex md:items-center md:space-x-4'>
-              {['Home', 'Aanbod', 'Over ons', 'Contact'].map((item, index) => (
-                <Link key={index} href={`/${item.toLowerCase().replace(/\s+/g, '-')}`}>
-                  <button
-                    className={`px-3 py-2 rounded-md text-sm font-medium text-black hover:text-gray-900 relative ${
-                      (activeLink === item.toLowerCase().replace(/\s+/g, '-') || hoverLink === item.toLowerCase().replace(/\s+/g, '-')) ? 'text-navy' : ''
-                    }`}
-                    onMouseEnter={() => handleLinkHover(item.toLowerCase().replace(/\s+/g, '-'))}
-                    onMouseLeave={handleLinkLeave}
-                  >
-                    {item}
-                    <div
-                      className={`absolute bottom-0 left-0 right-0 h-1 rounded-full transition-all duration-300 ${
-                        activeLink === item.toLowerCase().replace(/\s+/g, '-') || hoverLink === item.toLowerCase().replace(/\s+/g, '-')
-                          ? 'bg-navy shadow-md'
-                          : 'bg-transparent'
-                      }`}
-                    ></div>
-                  </button>
-                </Link>
-              ))}
-            </div>
+      {['Home', 'Aanbod', 'Over ons', 'Contact'].map((item, index) => (
+        <Link key={index} href={`/${item.toLowerCase().replace(/\s+/g, '-')}`}>
+          <button
+            className={`px-3 py-2 rounded-md text-sm font-medium text-black hover:text-gray-900 relative ${
+              (activeLink === item.toLowerCase().replace(/\s+/g, '-') || hoverLink === item.toLowerCase().replace(/\s+/g, '-')) ? 'text-navy' : ''
+            }`}
+            onMouseEnter={() => handleLinkHover(item.toLowerCase().replace(/\s+/g, '-'))}
+            onMouseLeave={handleLinkLeave}
+            onClick={() => handleLinkClick(item.toLowerCase().replace(/\s+/g, '-'))}
+          >
+            {item}
+            <div
+              className={`absolute bottom-0 left-0 right-0 h-1 rounded-full transition-all duration-300 ${
+                activeLink === item.toLowerCase().replace(/\s+/g, '-') || hoverLink === item.toLowerCase().replace(/\s+/g, '-')
+                  ? 'bg-navy shadow-md'
+                  : 'bg-transparent'
+              }`}
+            ></div>
+          </button>
+        </Link>
+      ))}
+    </div>
             <div className="flex space-x-2">
               {user ? (
                 <>
