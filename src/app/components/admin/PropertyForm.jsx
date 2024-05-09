@@ -7,7 +7,6 @@ import StringFieldArray from "./common/StringFieldArray";
 import BiddingFieldArray from "./common/BiddingFieldArray";
 import BookingSlotsFieldArray from "./common/BookingSlotsFieldArray";
 
-
 const emptyState = {
   title: "",
   address: "",
@@ -37,21 +36,10 @@ const emptyState = {
   biddingData: {
     initialPrice: 0,
     bidEndTime: "",
-    bids: [
-      {
-        bidder: "",
-        amount: "",
-        time: "",
-      },
-    ],
+    bids: [],
   },
   bookingData: {
-    bookingSlots: [
-      {
-        bookingDate: "",
-        bookingTime: "",
-      },
-    ],
+    bookingSlots: [],
   },
 };
 
@@ -113,8 +101,8 @@ const validationSchema = Yup.object().shape({
     })
   ),
   biddingData: Yup.object().shape({
-    initialPrice: Yup.number().required("Initial price is required"),
-    bidEndTime: Yup.date().required("Bid end time is required"),
+    initialPrice: Yup.number(),
+    bidEndTime: Yup.date(),
     bids: Yup.array().of(
       Yup.object().shape({
         bidder: Yup.string(),
@@ -129,7 +117,7 @@ const validationSchema = Yup.object().shape({
         bookingDate: Yup.date(),
         bookingTime: Yup.string(),
       })
-    ).required("Booking slots are required"),
+    ),
   }),
 });
 
@@ -198,7 +186,7 @@ const PropertyForm = ({ id, dataSubmitted }) => {
                 type="text"
                 name="title"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="title" component="div" />
             </div>
@@ -208,7 +196,7 @@ const PropertyForm = ({ id, dataSubmitted }) => {
                 type="text"
                 name="address"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="address" component="div" />
             </div>
@@ -218,7 +206,7 @@ const PropertyForm = ({ id, dataSubmitted }) => {
                 type="text"
                 name="price"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="price" component="div" />
             </div>
@@ -228,7 +216,7 @@ const PropertyForm = ({ id, dataSubmitted }) => {
                 type="text"
                 name="description"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="description" component="div" />
             </div>
@@ -260,7 +248,7 @@ const PropertyForm = ({ id, dataSubmitted }) => {
                 type="number"
                 name="layoutDetailsData.aantalKamers"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="layoutDetailsData.aantalKamers" component="div" />
             </div>
@@ -270,7 +258,7 @@ const PropertyForm = ({ id, dataSubmitted }) => {
                 type="number"
                 name="layoutDetailsData.aantalSlaapkamers"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="layoutDetailsData.aantalSlaapkamers" component="div" />
             </div>
@@ -280,7 +268,7 @@ const PropertyForm = ({ id, dataSubmitted }) => {
                 type="number"
                 name="layoutDetailsData.aantalBadkamers"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="layoutDetailsData.aantalBadkamers" component="div" />
             </div>
@@ -290,7 +278,7 @@ const PropertyForm = ({ id, dataSubmitted }) => {
                 type="number"
                 name="layoutDetailsData.aantalWoonlagen"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="layoutDetailsData.aantalWoonlagen" component="div" />
             </div>
@@ -313,7 +301,7 @@ const PropertyForm = ({ id, dataSubmitted }) => {
                 type="text"
                 name="energyData.isolatie"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="energyData.isolatie" component="div" />
             </div>
@@ -323,7 +311,7 @@ const PropertyForm = ({ id, dataSubmitted }) => {
                 type="text"
                 name="energyData.verwarming"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="energyData.verwarming" component="div" />
             </div>
@@ -333,7 +321,7 @@ const PropertyForm = ({ id, dataSubmitted }) => {
                 type="text"
                 name="energyData.warmWater"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="energyData.warmWater" component="div" />
             </div>
@@ -343,7 +331,7 @@ const PropertyForm = ({ id, dataSubmitted }) => {
                 type="text"
                 name="energyData.cvKetel"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="energyData.cvKetel" component="div" />
             </div>
@@ -353,7 +341,7 @@ const PropertyForm = ({ id, dataSubmitted }) => {
                 type="text"
                 name="energyData.energielabel"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="energyData.energielabel" component="div" />
             </div>
@@ -376,7 +364,7 @@ const PropertyForm = ({ id, dataSubmitted }) => {
                 type="number"
                 name="biddingData.initialPrice"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="biddingData.initialPrice" component="div" />
             </div>
@@ -386,7 +374,7 @@ const PropertyForm = ({ id, dataSubmitted }) => {
                 type="number"
                 name="biddingData.bidEndTime"
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
               />
               <ErrorMessage className="text-red-500" name="biddingData.bidEndTime" component="div" />
             </div>
