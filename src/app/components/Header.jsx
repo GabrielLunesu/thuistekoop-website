@@ -34,7 +34,7 @@ const Header = () => {
               <Image src={user.picture} alt="Profile" width={35} height={35} className="rounded-full mr-2 order-first" />
                 <Link href="/api/auth/logout">
                   <button className="px-4 py-2 text-sm font-medium text-white bg-navy rounded-md hover:bg-navy-dark transition duration-300">
-                    Logout
+                    Log uit
                   </button>
                 </Link>
               </>
@@ -42,14 +42,10 @@ const Header = () => {
               <>
                 <Link href="/api/auth/login">
                   <button className="px-4 py-2 text-sm font-medium text-white bg-navy rounded-md hover:bg-navy-dark transition duration-300">
-                    Login
+                    Aanmelden
                   </button>
                 </Link>
-                <Link href="/api/auth/register">
-                  <button className="px-4 py-2 text-sm font-medium text-black bg-white border border-coolGray-200 rounded-md hover:bg-coolGray-100 transition duration-300">
-                    Register
-                  </button>
-                </Link>
+              
               </>
             )}
           </div>
