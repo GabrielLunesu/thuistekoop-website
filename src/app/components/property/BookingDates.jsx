@@ -1,15 +1,13 @@
+import React, { useState } from 'react';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { parseISO, format } from 'date-fns';
-import { useState } from 'react';
 
 const BookingDates = ({ bookingSlots, propertyTitle }) => {
   const { user, isLoading } = useUser();
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
     subject: '',
-    body: '',
+    message: '',
   });
 
   const formatDateTime = (isoDateString) => {
@@ -29,9 +27,9 @@ const BookingDates = ({ bookingSlots, propertyTitle }) => {
     const userEmail = user.email;
     const userName = user.name;
     const subject = `Boekingsaanvraag voor ${propertyTitle}`;
-    const body = `Hallo, mijn naam is ${userName} en ik wil een bezoek boeken voor ${propertyTitle} op ${bookingDate}. Mijn e-mailadres is ${userEmail}.`;
+    const message = `Naam: ${userName}\nEmail: ${userEmail}\nHallo, mijn naam is ${userName} en ik wil een bezoek boeken voor ${propertyTitle} op ${bookingDate}.`;
 
-    setFormData({ name: userName, email: userEmail, subject, body });
+    setFormData({ subject, message });
     setShowModal(true);
   };
 
@@ -60,18 +58,19 @@ const BookingDates = ({ bookingSlots, propertyTitle }) => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-6">
+    <div className="p-4 bg-white my-4 mb-4">
       <h3 className="text-xl font-semibold mb-4">Beschikbare boekingsslots:</h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="flex flex-wrap gap-4 justify-start">
         {bookingSlots.map((slot, index) => (
           <div
             key={index}
-            className="bg-gray-100 rounded-lg p-4 shadow-md transition-all duration-300 hover:shadow-lg"
+            className="bg-navy text-white font-bold rounded-lg text-center max-w-md p-4 shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-xl"
+            style={{ minWidth: "250px" }}
           >
-            <p className="text-gray-600 mb-2">{formatDateTime(slot.bookingDate)}</p>
+            <p className="text-white mb-2 font-medium">{formatDateTime(slot.bookingDate)}</p>
             <button
               onClick={() => handleBookingClick(formatDateTime(slot.bookingDate))}
-              className="bg-navy text-white px-4 py-2 rounded-md hover:bg-dark-blue transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-navy-dark"
+              className="bg-white text-navy font-bold p-2 rounded border border-white hover:bg-navy hover:text-white transition-colors duration-300"
             >
               Boek bezoek
             </button>
@@ -81,33 +80,15 @@ const BookingDates = ({ bookingSlots, propertyTitle }) => {
 
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
+          <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full relative">
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-3 right-3 text-gray-600 hover:text-gray-800"
+            >
+              <span className="text-2xl">&times;</span>
+            </button>
             <h3 className="text-lg font-semibold mb-4">Boekingsaanvraag</h3>
             <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label htmlFor="name" className="block font-semibold mb-1">
-                  Naam:
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2"
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="email" className="block font-semibold mb-1">
-                  E-mailadres:
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2"
-                />
-              </div>
               <div className="mb-4">
                 <label htmlFor="subject" className="block font-semibold mb-1">
                   Onderwerp:
@@ -121,13 +102,13 @@ const BookingDates = ({ bookingSlots, propertyTitle }) => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="body" className="block font-semibold mb-1">
+                <label htmlFor="message" className="block font-semibold mb-1">
                   Bericht:
                 </label>
                 <textarea
-                  id="body"
-                  value={formData.body}
-                  onChange={(e) => setFormData({ ...formData, body: e.target.value })}
+                  id="message"
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="w-full border border-gray-300 rounded-md px-3 py-2"
                   rows="4"
                 ></textarea>
@@ -135,7 +116,7 @@ const BookingDates = ({ bookingSlots, propertyTitle }) => {
               <div className="flex justify-end">
                 <button
                   type="submit"
-                  className="bg-navy text-white px-4 py-2 rounded-md hover:bg-dark-blue transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-navy-dark"
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 >
                   Verzenden
                 </button>

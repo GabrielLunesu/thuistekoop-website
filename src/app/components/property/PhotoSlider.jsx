@@ -14,7 +14,7 @@ const PhotoSlider = ({ images }) => {
   };
 
   return (
-    <div className="slider-container px-4 mt-5 shadow-lg">
+    <div className="slider-container px-4 mt-20 ">
       <Slider {...settings} >
         {images.map((image, index) => (
           <div key={index} className="w-full rounded-xl h-64 md:h-96">  

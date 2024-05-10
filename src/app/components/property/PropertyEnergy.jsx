@@ -2,7 +2,7 @@ import React from 'react';
 
 const PropertyEnergy = ({ energy }) => {
   return (
-    <div className="p-4 bg-white shadow rounded-lg">
+    <div className="p-4 bg-white  my-4">
       <h2 className="text-xl font-semibold mb-4">Energie</h2>
       <div className="grid grid-cols-2 gap-4">
         <div className="col-span-2">

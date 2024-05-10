@@ -371,7 +371,7 @@ const PropertyForm = ({ id, dataSubmitted }) => {
             <div>
               <label className="block text-white text-sm font-bold mb-2">BidEndTime</label>
               <Field
-                type="number"
+                type="text"
                 name="biddingData.bidEndTime"
                 onChange={handleChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"

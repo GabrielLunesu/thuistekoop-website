@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import { useState } from 'react';
 import ListingContainer from '@/app/components/listings/ListingContainer';
@@ -32,7 +33,7 @@ const Aanbod = ({ properties }) => {
   
     
   return (
-    <div className="">
+    <div className="mt-10 mb-20">
       <ListingContainer property={properties} />
 
     </div>

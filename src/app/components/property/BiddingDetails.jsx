@@ -9,7 +9,6 @@ const BiddingDetails = ({ initialPrice, bids, bidEndTime, propertyTitle }) => {
   const [formData, setFormData] = useState({
     bidAmount: '',
     name: '',
-    email: '',
     phoneNumber: ''
   });
   const [canBid, setCanBid] = useState(false);
@@ -19,8 +18,7 @@ const BiddingDetails = ({ initialPrice, bids, bidEndTime, propertyTitle }) => {
     if (user && !isLoading) {
       setFormData(prevFormData => ({
         ...prevFormData,
-        name: user.name || '',
-        email: user.email || ''
+        name: user.name || ''
       }));
     }
   }, [user, isLoading]);
@@ -63,33 +61,30 @@ const BiddingDetails = ({ initialPrice, bids, bidEndTime, propertyTitle }) => {
     setHighestBid(Math.max(initialPrice, ...bids.map(bid => bid.amount)));
   }, [bids, initialPrice]);
 
-  const handleBid = (bidAmount) => {
+  const handleBid = () => {
     if (!user || isLoading) {
       alert('Log alstublieft in voordat u biedt.');
       return;
     }
-    setFormData({ ...formData, bidAmount });
     setShowForm(true);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting with:", formData);
-
-    const emailContent = {
-      subject: `Nieuw bod voor ${propertyTitle}`,
-      message: `Naam: ${formData.name}\nEmail: ${formData.email}\nTelefoonnummer: ${formData.phoneNumber}\nBod: €${formData.bidAmount}`
-    };
-
-    console.log("Email content:", emailContent);
-
     try {
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(emailContent),
+        body: JSON.stringify({
+          subject: `Nieuw bod voor ${propertyTitle}`,
+          message: `
+            Naam: ${formData.name}
+            Bod: €${formData.bidAmount}
+            Telefoonnummer: ${formData.phoneNumber}
+          `
+        }),
       });
 
       if (response.ok) {
@@ -116,7 +111,7 @@ const BiddingDetails = ({ initialPrice, bids, bidEndTime, propertyTitle }) => {
   };
 
   return (
-    <div className="bg-navy px-10 mx-5 p-4 shadow-2xl rounded-lg text-white">
+    <div className="bg-white p-4 mt-4 text-black">
       <div className="mb-4">
         <h2 className="text-2xl font-bold">Huidige Prijs: €{highestBid.toLocaleString()}</h2>
         <p>Bieden sluit over: {formatTimeLeft()}</p>
@@ -125,51 +120,65 @@ const BiddingDetails = ({ initialPrice, bids, bidEndTime, propertyTitle }) => {
         <h3 className="text-lg font-semibold">Huidige Biedingen:</h3>
         {bids.length > 0 ? (
           bids.map((bid, index) => (
-            <div key={index} className="p-3 rounded-md shadow-md bg-dark-blue">
-              <div>Bieder: {bid.bidder}</div>
-              <div>Bedrag: €{bid.amount.toLocaleString()}</div>
-              <div>Tijd: {bid.time}</div>
+            <div key={index} className="p-3 text-white max-w-md rounded-md shadow-md bg-navy">
+              <div><b>Bieder: </b> {bid.bidder}</div>
+              <div><b>Bedrag: </b> €{bid.amount.toLocaleString()}</div>
+              <div><b>Tijd: </b> {bid.time}</div>
             </div>
           ))
         ) : (
           <p className="text-sm italic">Geen huidige biedingen.</p>
         )}
-        <input
-          type="number"
-          placeholder="Uw bod"
-          value={formData.bidAmount}
-          onChange={handleBidAmountChange}
-          className="p-2 rounded shadow appearance-none text-black"
-          min={highestBid + 1}  // Ensure the bid is higher than the highest bid
-        />
         <button
-          onClick={() => handleBid(formData.bidAmount)}
-          disabled={!canBid}
-          className={`bg-white ml-5 text-black font-bold p-2 rounded shadow ${
-            canBid ? '' : 'opacity-50 cursor-not-allowed'
-          }`}
+          onClick={handleBid}
+          className="bg-white text-navy font-bold p-2 rounded border border-navy hover:bg-navy hover:text-white transition-colors duration-300"
         >
-          Plaats bod
+          Wilt u een bod plaatsen?
         </button>
       </div>
       {showForm && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-          <div className="bg-navy rounded-lg shadow-lg p-6 max-w-md w-full">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 animate-fade-in">
+          <div className="bg-navy rounded-lg text-white shadow-lg p-6 max-w-md w-full animate-slide-up relative">
+            <button
+              onClick={() => setShowForm(false)}
+              className="absolute top-4 right-4 text-white hover:text-gray-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
             <h3 className="text-lg font-semibold mb-4">Bevestig uw bod</h3>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block font-semibold mb-1">Naam:</label>
-                <input type="text" value={formData.name} readOnly className="w-full text-black border rounded-md px-3 py-2" />
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full text-black border rounded-md px-3 py-2"
+                />
               </div>
-              {/* <div className="mb-4">
-                <label className="block font-semibold mb-1">Email:</label>
-                <input type="email" value={formData.email} readOnly className="w-full text-black border rounded-md px-3 py-2" />
-              </div> */}
               <div className="mb-4">
                 <label className="block font-semibold mb-1">Bod:</label>
-                <input type="text" value={formData.bidAmount} readOnly className="w-full text-black border rounded-md px-3 py-2" />
+                <input
+                  type="number"
+                  value={formData.bidAmount}
+                  onChange={handleBidAmountChange}
+                  className="w-full text-black border rounded-md px-3 py-2"
+                  min={highestBid + 1}
+                />
               </div>
-              
               <div className="mb-4">
                 <label className="block font-semibold mb-1">Telefoonnummer:</label>
                 <input
@@ -182,7 +191,11 @@ const BiddingDetails = ({ initialPrice, bids, bidEndTime, propertyTitle }) => {
                 />
               </div>
               <div className="flex justify-end">
-                <button type="submit" className="bg-white text-navy px-4 py-2 rounded-md">
+                <button
+                  type="submit"
+                  className="bg-white text-navy px-4 py-2 rounded-md"
+                  disabled={!canBid}
+                >
                   Bevestigen en verzenden
                 </button>
               </div>

@@ -1,6 +1,6 @@
 const PropertySpace = ({ space }) => {
     return (
-      <div className="p-4 bg-white shadow-md my-4">
+      <div className="p-4 bg-white  my-4">
         <h2 className="text-xl font-bold mb-2">Oppervlakte en Inhoud</h2>
         <div className="grid grid-cols-1 gap-4">
           {space.map((space, index) => (

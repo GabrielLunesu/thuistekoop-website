@@ -57,7 +57,7 @@ const PropertyPage = ({ property }) => {
     bookingData: { bookingSlots }
   } = property;
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className=" my-10 mx-auto">
       <PhotoSlider images={images} />
       <PropertySummary property={{ title, address, price }} />
 
